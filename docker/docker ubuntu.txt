@@ -1,0 +1,48 @@
+$docker pull ubuntu
+**************************************************************
+$docker run --name iubuntu -t -i -d -p 3316:22 ubuntu
+参数: 
+–name 指定生成的容器的名称 
+-i: 以交互模式运行容器，保证容器中STDIN是开启的。通常与 -t 同时使用； 
+-t: 为容器重新分配一个伪tty终端，通常与 -i 同时使用； 
+-d: 后台运行容器，并返回容器ID； 
+-p:可以指定要映射的IP和端口，但是在一个指定端口上只可以绑定一个容器。支持的格式有 hostPort:containerPort、ip:hostPort:containerPort、 ip::containerPort。 
+ubuntu 则是镜像名称，镜像ID也可以
+
+*********************************************************
+$docker exec -t -i iubuntu /bin/bash
+
+docker查看容器IP地址
+docker inspect 容器ID | grep IPAddress
+
+启动已存在容器
+docker start 容器id
+
+使用SSH链接docker 容器ubuntu
+$C:\Users\Administrator> ssh root@localhost -p 3316
+
+==========================================
+先停止容器
+docker stop container-name
+
+保存刚刚修改的镜像#
+docker commit  [容器ID/容器名]  [REPOSITORY:TAG]
+$docker commit  [容器ID/容器名]  [REPOSITORY:TAG]
+用新镜像运行容器
+docker run -it -d --name container-name -p p1:p1 -p p2:p2 new-image-name
+
+保存镜像
+$docker save -o mynetcore.tar mynetcore:v1
+或
+$docker save > mynetcore.tar mynetcore:v1
+其中-o和>表示输出到文件，mynetcore.tar为目标文件，mynetcore:v1是源镜像名（name:tag）
+
+$rsync -av --progress mynetcore.tar root@ip:~/
+加载镜像
+$docker load -i mynetcore.tar
+或
+$docker load < mynetcore.tar
+其中-i和<表示从文件输入。会成功导入镜像及相关元数据，包括tag信息
+运行镜像成容器
+   
+
