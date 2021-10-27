@@ -32,3 +32,18 @@ $ git push -u origin master
 git add -A，提交所有变化
 
 $ git pull origin
+
+$ git merge newbranch
+$ git checkout newbranch
+$ git add docker
+$ git commit -m"dockerdoc"
+
+$ git checkout master
+$ git merge newbranch
+$ git branch -D newbranch
+$ git push origin
+
+
+
+
+
