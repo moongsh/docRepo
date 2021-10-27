@@ -1,0 +1,34 @@
+$ git config --global --list
+
+查看当前全局的用户名和邮箱
+git config --global user.name 
+git config --global user.email 
+配置
+git config --global user.name "Your Name"
+git config --global user.email "email@example.com"
+
+修改git的用户名和提交的邮箱：
+1）修改全局
+         如果你要修改当前全局的用户名和邮箱时，需要在上面的两条命令中添加一个参数，--global，代表的是全局。
+         命令分别为：git config  --global user.name 你的目标用户名；
+                            git config  --global user.email 你的目标邮箱名;
+2）修改当前的 project
+        git 修改当前的project的用户名的命令为：git config user.name 你的目标用户名;
+        git 修改当前的project提交邮箱的命令为：git config user.email 你的目标邮箱名;
+
+$ ssh -T git@github.com
+$ ssh-add -K ~/.ssh/id_rsa
+
+$ git init
+
+$ git remote add + 名字 + 连接地址
+
+$ git remote -v
+$ git remote remove origin
+
+$ git push -u 仓库名称 分支
+$ git push -u origin master
+
+git add -A，提交所有变化
+
+$ git pull origin
