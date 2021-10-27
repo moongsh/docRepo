@@ -1,0 +1,49 @@
+查看系统ssh-key代理
+PS C:\Users\Administrator> ssh-add -l
+Error connecting to agent: No such file or directory
+
+检查ssh-agent服务是否启动成功
+PS C:\Users\Administrator> get-service ssh*
+
+ssh-agent服务状态为 stopped,启动服务
+PS C:\Users\Administrator> set-service ssh-agent -startuptype manual
+PS C:\Users\Administrator> start-service ssh-agent
+PS C:\Users\Administrator> ssh-add -l
+The agent has no identities.
+
+***************************************************
+创建  私钥 和  公钥
+$ssh-keygen -t rsa
+
+私钥导出公钥：
+C:\Users\Administrator\.ssh>ssh-keygen -yf githubproxy > pu_key.pub
+
+把 .ssh 目录下的私钥添加的 ssh-agent
+$ssh-add ~/.ssh/id_rsa_aaa
+
+#github
+Host aaa
+User git
+HostName github.com
+IdentityFile ~/.ssh/id_rsa_aaa
+
+#开源中国
+Host bbb
+User git
+HostName git.oschina.net
+IdentityFile ~/.ssh/id_rsa_bbb
+
+git clone git@git.oschina.net:userName/projectName.git
+
+
+
+
+
+
+
+
+
+
+
+
+
