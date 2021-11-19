@@ -20,8 +20,11 @@ $ ssh -T git@github.com
 $ ssh-add -K ~/.ssh/id_rsa
 
 $ git init
-
+#把本地仓库关联到GitHub仓库
 $ git remote add + 名字 + 连接地址
+$ git remote add origin git@github.com:账户名/Repository name xxx.git
+#把本地仓库的内容推送到GitHub仓库
+$git push -u origin master
 
 $ git remote -v
 $ git remote remove origin
