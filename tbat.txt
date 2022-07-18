@@ -1,0 +1,36 @@
+@echo off
+TITLE 网站存储过程批处理
+set yyyyMMdd=%date:~0,4%%date:~5,2%%date:~8,2%
+set hhmmss=%time:~0,2%%time:~3,2%%time:~6,2%
+set logFile=script%yyyyMMdd%%hhmmss%.log 
+
+echo 当前目录是：& chdir
+echo 正在执行... 
+
+::更新所有存储过程
+@for /r %%c in (*.sql) do (	
+	@if exist %%c (	
+		osql -E -n -i %%c -b >> "%logFile%" 
+		@if ERRORLEVEL == 1 ( echo 执行失败：%%c  & echo ********执行失败：%%c >>"%logFile%")  else ( echo 成功：%%c)
+	)
+)
+echo 执行完毕
+::查看日志
+set "n="
+for /f "tokens=* delims= " %%a in ( %logFile% ) do (
+	if not "%%a" == "" set n=a	
+)
+if defined n ( 
+	echo 按任意键查看日志
+	pause
+	goto openlog
+) else goto end
+
+:openlog
+::打开日志
+type "%logFile%"
+goto end
+
+:end
+::退出程序
+pause
